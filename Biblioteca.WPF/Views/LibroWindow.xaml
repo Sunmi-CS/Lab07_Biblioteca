@@ -1,0 +1,39 @@
+<Window x:Class="Biblioteca.WPF.Views.LibroWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Libro" Height="300" Width="400">
+    <Grid Margin="8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,8">
+            <TextBlock Text="Título:" Width="80" VerticalAlignment="Center" />
+            <TextBox x:Name="txtTitulo" Width="260" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,0,0,8">
+            <TextBlock Text="ISBN:" Width="80" VerticalAlignment="Center" />
+            <TextBox x:Name="txtISBN" Width="260" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,0,0,8">
+            <TextBlock Text="AutorId:" Width="80" VerticalAlignment="Center" />
+            <TextBox x:Name="txtAutorId" Width="100" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="0,0,0,8">
+            <TextBlock Text="Ejemplares:" Width="80" VerticalAlignment="Center" />
+            <TextBox x:Name="txtEjemplares" Width="100" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Right">
+            <Button Content="Aceptar" Width="80" Margin="0,0,8,0" Click="BtnAceptar_Click" />
+            <Button Content="Cancelar" Width="80" Click="BtnCancelar_Click" />
+        </StackPanel>
+    </Grid>
+</Window>

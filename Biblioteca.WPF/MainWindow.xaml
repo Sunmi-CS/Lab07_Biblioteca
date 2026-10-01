@@ -1,0 +1,111 @@
+<Window x:Class="Biblioteca.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Biblioteca" Height="600" Width="900">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Libros">
+                <Grid Margin="8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                        <Button x:Name="btnRefrescarLibros" Content="Refrescar" Click="BtnRefrescarLibros_Click" Margin="0,0,8,0" />
+                        <Button Content="Nuevo" Click="BtnNuevoLibro_Click" Margin="8,0,0,0" />
+                        <Button Content="Editar" Click="BtnEditarLibro_Click" Margin="8,0,0,0" />
+                        <Button Content="Eliminar" Click="BtnEliminarLibro_Click" Margin="8,0,0,0" />
+                        <TextBox x:Name="txtBuscarLibros" Width="300" />
+                        <Button Content="Buscar" Click="BtnBuscarLibros_Click" Margin="8,0,0,0" />
+                    </StackPanel>
+
+                    <DataGrid x:Name="dgLibros" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Binding="{Binding LibroId}" Width="50" />
+                            <DataGridTextColumn Header="Título" Binding="{Binding Titulo}" Width="*" />
+                            <DataGridTextColumn Header="Autor" Binding="{Binding NombreAutor}" Width="200" />
+                            <DataGridTextColumn Header="ISBN" Binding="{Binding ISBN}" Width="150" />
+                            <DataGridTextColumn Header="Ejemplares" Binding="{Binding Ejemplares}" Width="100" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Socios">
+                <Grid Margin="8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                        <Button Content="Refrescar" Click="BtnRefrescarSocios_Click" Margin="0,0,8,0" />
+                        <Button Content="Nuevo" Click="BtnNuevoSocio_Click" Margin="8,0,0,0" />
+                        <Button Content="Editar" Click="BtnEditarSocio_Click" Margin="8,0,0,0" />
+                        <Button Content="Eliminar" Click="BtnEliminarSocio_Click" Margin="8,0,0,0" />
+                        <TextBox x:Name="txtBuscarSocios" Width="300" />
+                        <Button Content="Buscar" Click="BtnBuscarSocios_Click" Margin="8,0,0,0" />
+                    </StackPanel>
+
+                    <DataGrid x:Name="dgSocios" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Binding="{Binding SocioId}" Width="50" />
+                            <DataGridTextColumn Header="DNI" Binding="{Binding DNI}" Width="100" />
+                            <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="*" />
+                            <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="200" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Préstamos">
+                <Grid Margin="8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Socios" FontWeight="Bold" />
+                        <DataGrid x:Name="dgSociosPrestamo" AutoGenerateColumns="False" Height="200" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Id" Binding="{Binding SocioId}" Width="50" />
+                                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="*" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <TextBlock Text="Libros disponibles" FontWeight="Bold" Margin="0,8,0,0" />
+                        <ListBox x:Name="lbLibrosDisponibles" SelectionMode="Extended" Height="200" DisplayMemberPath="Titulo" />
+
+                        <Button Content="Registrar Préstamo" Click="BtnRegistrarPrestamo_Click" Margin="0,8,0,0" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="Préstamos" FontWeight="Bold" />
+                        <DataGrid x:Name="dgPrestamos" AutoGenerateColumns="False" Height="200" IsReadOnly="True" SelectionChanged="DgPrestamos_SelectionChanged">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Id" Binding="{Binding PrestamoId}" Width="50" />
+                                <DataGridTextColumn Header="Socio" Binding="{Binding NombreSocio}" Width="*" />
+                                <DataGridTextColumn Header="F. Prestamo" Binding="{Binding FechaPrestamo}" Width="150" />
+                                <DataGridTextColumn Header="F. Límite" Binding="{Binding FechaLimite}" Width="150" />
+                                <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="100" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <TextBlock Text="Detalle" FontWeight="Bold" Margin="0,8,0,0" />
+                        <DataGrid x:Name="dgDetalle" AutoGenerateColumns="False" Height="200" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="LibroId" Binding="{Binding LibroId}" Width="80" />
+                                <DataGridTextColumn Header="Título" Binding="{Binding TituloLibro}" Width="*" />
+                                <DataGridTextColumn Header="Fecha Devolución" Binding="{Binding FechaDevolucion}" Width="150" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <Button Content="Devolver libro seleccionado" Click="BtnDevolver_Click" Margin="0,8,0,0" />
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
